@@ -1,0 +1,35 @@
+version: "3.4"
+
+services:
+  # redis:
+  #   image: redis
+  #   expose:
+  #     - 6379
+  nglancer:
+    env_file: .env
+    build:
+      context: ./neuroglancer
+      dockerfile: neuroglancer.Dockerfile
+    ports:
+      - '8081:8081'
+  # worker:
+  #   build:
+  #     context: ./flask-demo
+  #     dockerfile: worker.Dockerfile
+  #   volumes:
+  #     - ./flask-demo/app:/app
+  #   depends_on:
+  #     - redis
+  #   env_file:
+  #     - ".env"
+  # scheduler:
+  #   build:
+  #     context: ./flask-demo
+  #     dockerfile: scheduler.Dockerfile
+  #   volumes:
+  #     - ./flask-demo/app:/app
+  #   depends_on:
+  #     - redis
+  #     - worker
+  #   env_file:
+  #     - ".env"
