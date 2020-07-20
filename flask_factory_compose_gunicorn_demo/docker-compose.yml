@@ -14,7 +14,7 @@ services:
       - ./flask-demo:/app
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - '5005:5005'
+      - '5000:5005'
   # worker:
   #   build:
   #     context: ./flask-demo

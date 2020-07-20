@@ -1,0 +1,34 @@
+version: "3.4"
+
+services:
+  # redis:
+  #   image: redis
+  #   expose:
+  #     - 6379
+  flask-demo:
+    env_file: .env
+    build:
+      context: ./flask-demo
+      dockerfile: flask-demo.Dockerfile
+    command: ["python", "run.py"]
+    volumes:
+      - ./flask-demo:/app
+    ports:
+      - '5000:5005'
+  flask-cvlauncher:
+    env_file: .env
+    build:
+      context: ./flask-cvlauncher
+      dockerfile: flask-cvlauncher.Dockerfile
+    command: ["python", "run.py"]
+    volumes:
+      - ./flask-cvlauncher:/app
+      - /jukebox/LightSheetData:/jukebox/LightSheetData
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - '5003:5005'
+networks:
+  default:
+    external:
+      name: doubleshot
+

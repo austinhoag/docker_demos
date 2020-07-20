@@ -8,4 +8,5 @@ RUN pip install -r requirements.txt
 
 COPY . /app
 
-CMD python run.py
+# CMD python run.py
+CMD gunicorn -w 3 run:app -b 0.0.0.0:5005
